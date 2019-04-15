@@ -1,3 +1,5 @@
+Credits go to Matthew Berlin, the stallion rider.
+
 ```
 ____________               ______                          
 __  ___/__(_)_____________ ___  /____                      
