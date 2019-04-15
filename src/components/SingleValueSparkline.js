@@ -5,7 +5,7 @@ import Sparkline from './Sparkline'
 
 const SingleValue = styled.div`
   font-family: "Open Sans", "Noto Sans JP", Helvetica, Arial, sans-serif;
-  font-weight: 100;
+  font-weight: 30;
   font-size: 72px;
   padding: 10px
 `;
