@@ -7,9 +7,17 @@ import styled from 'styled-components'
 const Container = styled.div`
 `;
 
+
+/* Define the Sparkline class
+  - Constructor
+  - average function
+  - render function
+*/
 export default class Sparkline extends React.Component {
   constructor (props) {
     super(props)
+
+    // Feed the highchart chart options here
     this.options = {
       chart: {
         align: 'center',
@@ -90,13 +98,24 @@ export default class Sparkline extends React.Component {
       }
   }
 
+  // Average Functino 
   static average (array) {
    return array.reduce((a, b) => a + b) / array.length
   }
 
+
+  // Render Function
   render() {
+
+    // Assign options variable to the Sparkline object's options
     const options = { ...this.options }
-    const compress = parseInt(this.props.config.data_granularity)
+
+    // Assign compress variable to this props-config-data_granuality. 
+    // The this.props.config.data_granuality piece is probably coming from the JSON blob inserted into looker.plugins.visualizations.add(...) in single_value_sparkline.js
+    const compress = parseInt(this.props.config.data_granularity) 
+
+
+    // If compress is non-null and is greater than 1, then squish it down based on the compression value
     if (compress && compress > 1) {
       const compressedData = []
       let bucket = []
@@ -108,12 +127,21 @@ export default class Sparkline extends React.Component {
         }
       }
       options.series[0].data = compressedData
-    } else {
+    } 
+    // Otherwise, don't do anything to the data, just give me every element in the array possible
+    else {
       options.series[0].data = this.props.data
     }
+
+    // assign the color to be the user inputted color; otherwise do nothing and use the default
     options.plotOptions.series.color = this.props.config.sparkline_color ? this.props.config.sparkline_color[0] : null
+
+    // Use the width and height that the user gives, or use default
     options.chart.width = this.props.config.width
     options.chart.height = this.props.config.height
+
+    // Elliot Note: Let's try giving the user an option to choose either "column" or "area"
+    options.chart.type = this.props.config.type
 
     return (
       <Container>
