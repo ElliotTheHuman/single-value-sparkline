@@ -15,7 +15,7 @@ export default class Sparkline extends React.Component {
         align: 'center',
         backgroundColor: null,
         borderWidth: 0,
-        type: 'area',
+        type: 'column',
         margin: [2, 0, 2, 0],
         width: 100,
         height: 100,
