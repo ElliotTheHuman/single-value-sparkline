@@ -23,7 +23,7 @@ export default class Sparkline extends React.Component {
         align: 'center',
         backgroundColor: null,
         borderWidth: 0,
-        type: 'column',
+        type: 'area',
         margin: [2, 0, 2, 0],
         width: 100,
         height: 100,
@@ -137,11 +137,11 @@ export default class Sparkline extends React.Component {
     options.plotOptions.series.color = this.props.config.sparkline_color ? this.props.config.sparkline_color[0] : null
 
     // Use the width and height that the user gives, or use default
-    options.chart.width = this.props.config.width
-    options.chart.height = this.props.config.height
+    options.chart.width = this.props.config.sparkline_width
+    options.chart.height = this.props.config.sparkline_height
 
     // Elliot Note: Let's try giving the user an option to choose either "column" or "area"
-    options.chart.type = this.props.config.type
+    options.chart.type = this.props.config.chart_type
 
     return (
       <Container>

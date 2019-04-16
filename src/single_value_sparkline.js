@@ -58,6 +58,7 @@ looker.plugins.visualizations.add({
     chart_type: {
       type: "string",
       label: "Chart Type",
+      display: "radio",
       values: [
         {"Area": "area"},
         {"Column": "column"}
