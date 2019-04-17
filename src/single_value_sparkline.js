@@ -1,4 +1,4 @@
-import  SomeClass from './components/SomeClass'
+import SingleValueSparkline from './components/SingleValueSparkline'
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -14,9 +14,9 @@ looker.plugins.visualizations.add({
       display: "radio",
       default: "large"
     },
-    color: {
+    sparkline_color: {
       type: "array",
-      label: "Color",
+      label: "Sparkline Color",
       display: "color",
       default: "#5b5d9a"
     },
@@ -45,14 +45,14 @@ looker.plugins.visualizations.add({
       ],
       default: "1"
     },
-   chart_width: {
+   sparkline_width: {
       type: "string",
-      label: "Chart Width",
+      label: "Sparkline Width",
       default: 100,
     },
-    chart_height: {
+    sparkline_height: {
       type: "string",
-      label: "Chart Height",
+      label: "Sparkline Height",
       default: 100,
     },
     chart_type: {
@@ -70,7 +70,7 @@ looker.plugins.visualizations.add({
   create: function(element, config) {
     element.innerHTML = `
       <style>
-        .area-chart {
+        .sparkline-single-value {
           /* Vertical centering */
           height: 100%;
           display: flex;
@@ -86,12 +86,12 @@ looker.plugins.visualizations.add({
     `;
 
     let container = element.appendChild(document.createElement("div"));
-    container.className = "area-chart";
+    container.className = "sparkline-single-value";
 
     this._textElement = container.appendChild(document.createElement("div"));
 
     this.chart = ReactDOM.render(
-      <SomeClass
+      <SingleValueSparkline
         done={false}
       />,
       this._textElement
@@ -99,7 +99,6 @@ looker.plugins.visualizations.add({
 
   },
 
-  // Wonder if this is for when the query changes
   updateAsync: function(data, element, config, queryResponse, details, done) {
     this.clearErrors();
     if (queryResponse.fields.dimensions.length == 0) {
@@ -108,7 +107,7 @@ looker.plugins.visualizations.add({
     }
 
     this.chart = ReactDOM.render(
-      <SomeClass
+      <SingleValueSparkline
         config={config}
         data={data}
         done={done}
