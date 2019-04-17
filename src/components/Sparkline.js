@@ -98,7 +98,7 @@ export default class Sparkline extends React.Component {
       }
   }
 
-  // Average Functino 
+  // Average Function
   static average (array) {
    return array.reduce((a, b) => a + b) / array.length
   }
